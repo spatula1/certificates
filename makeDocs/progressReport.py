@@ -1,12 +1,13 @@
 import io
 import re
 import fitz
-import sys
 import os
+import sys
+
 # Add the project_directory to the sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from makeDocs import parseRoster as parseRoster
+from makeDocs import parseRoster
 import makeDocs.parseLaneChart as parseLaneChart
 
 def generate_progress_reports(lane_chart_stream, roster_stream, date):
@@ -15,12 +16,14 @@ def generate_progress_reports(lane_chart_stream, roster_stream, date):
     coachRoster = parseLaneChart.load_lane_chart(io.BytesIO(lane_chart_stream.read()))
 
     # Initialize in-memory PDF documents
+    output_pdf_stream = io.BytesIO()
     temp_pdf_stream = io.BytesIO()
-    temp_pdf = fitz.open(stream=temp_pdf_stream)
 
-    # Assuming you have a PDF template in-memory for use
-    # If not, you need to load it into memory or adapt this part
-    template_pdf_path = 'path_to_your_template/progressReport.pdf'
+    # Load the template PDF into memory
+    template_pdf_path = 'pdfImports/progressReport.pdf'
+    if not os.path.isfile(template_pdf_path):
+        raise FileNotFoundError(f"Template PDF file not found: {template_pdf_path}")
+
     with open(template_pdf_path, 'rb') as f:
         temp_pdf_stream.write(f.read())
     temp_pdf_stream.seek(0)
@@ -126,7 +129,6 @@ def generate_progress_reports(lane_chart_stream, roster_stream, date):
     if doc.page_count == 0:
         raise ValueError("The document has zero pages after processing.")
 
-    output_pdf_stream = io.BytesIO()
     doc.save(output_pdf_stream)
     output_pdf_stream.seek(0)
 
