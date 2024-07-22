@@ -1,6 +1,13 @@
 import io
 import re
 import fitz
+import sys
+import os
+# Add the project_directory to the sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from makeDocs import parseRoster as parseRoster
+import makeDocs.parseLaneChart as parseLaneChart
 
 def generate_progress_reports(lane_chart_stream, roster_stream, date):
     # Load the roster and lane chart data from in-memory streams
