@@ -92,7 +92,7 @@ def generate_progress_reports(lane_chart_stream, roster_stream, date):
         elif className in ["Basic 4", "Basic 3", "Basic 2", "Basic 1"]:
             pageToInsert = 3
             x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 100, 60, 300, 490, 700, 136, 152, 152, 570, 137, 152, 152, 570
-        elif className in ["Pre-Freeskate", "Freeskate 1", "Freeskate 2"]:
+        elif className in ["Pre Freeskate", "Freeskate 1", "Freeskate 2"]:
             pageToInsert = 4
             x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 95, 60, 300, 490, 700, 134, 151, 151, 571, 134, 151, 151, 571
         elif className in ["Freeskate 3", "Freeskate 4", "Freeskate 5", "Freeskate 6"]:
