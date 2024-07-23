@@ -82,40 +82,40 @@ def generate_progress_reports(lane_chart_stream, roster_stream, date):
         #change page based on class
         if className in ["Lions & Cubs", "Snowplow Sam 1", "Snowplow Sam 2"]:
             pageToInsert = 0
-            x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 85, 60, 300, 480, 690, 134, 150, 150, 555, 137, 153, 152.5, 558
+            x1, x2, x3, x4, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 85, 60, 300, 220, 480, 690, 134, 150, 150, 555, 137, 153, 152.5, 558
         elif className in ["Snowplow Sam 3", "Snowplow Sam 4"]:
             pageToInsert = 1
-            x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 100, 60, 305, 485, 700, 134, 150, 150, 555, 133, 150, 150, 555
+            x1, x2, x3, x4, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 100, 60, 305, 220, 485, 700, 134, 150, 150, 555, 133, 150, 150, 555
         elif className in ["Basic 5", "Basic 6"]:
             pageToInsert = 2
-            x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 100, 60, 300, 490, 700, 138, 154, 154, 560, 139, 154, 154, 560
+            x1, x2, x3, x4, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 100, 60, 300, 220, 490, 694, 138, 154, 154, 560, 139, 154, 154, 560
         elif className in ["Basic 4", "Basic 3", "Basic 2", "Basic 1"]:
             pageToInsert = 3
-            x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 100, 60, 300, 490, 700, 136, 152, 152, 570, 137, 152, 152, 570
+            x1, x2, x3, x4, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 100, 60, 300, 220, 490, 690, 136, 152, 152, 570, 137, 152, 152, 570
         elif className in ["Pre Freeskate", "Freeskate 1", "Freeskate 2"]:
             pageToInsert = 4
-            x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 95, 60, 300, 490, 700, 134, 151, 151, 571, 134, 151, 151, 571
+            x1, x2, x3, x4, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 95, 60, 300, 220, 490, 694, 134, 151, 151, 571, 134, 151, 151, 571
         elif className in ["Freeskate 3", "Freeskate 4", "Freeskate 5", "Freeskate 6"]:
             pageToInsert = 5
-            x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 100, 60, 315, 490, 700, 131, 146, 146, 573, 134, 149, 149, 575
+            x1, x2, x3, x4, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 100, 60, 305, 235, 490, 694, 131, 146, 146, 573, 134, 149, 149, 575
         elif className in ["Adult Gold"]:
             pageToInsert = 6
-            x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 90, 60, 300, 480, 700, 135, 151, 151, 562, 138, 154, 154, 560
+            x1, x2, x3, x4, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 90, 60, 300, 220, 480, 700, 135, 151, 151, 562, 138, 154, 154, 560
         elif className in ["Adult Bronze", "Adult Silver"]:
             pageToInsert = 7
-            x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 90, 60, 300, 480, 700, 135, 151, 151, 562, 136, 151, 151, 560
+            x1, x2, x3, x4, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 90, 60, 300, 220, 480, 700, 135, 151, 151, 562, 136, 151, 151, 560
         elif className in ["LK Skating Skills 8U", "LK Skating Skills 14U", "LK Adv Skating Skills 8U", "LK Adv Skating Skills 14U"]:
             pageToInsert = 8
-            x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 90, 50, 300, 485, 700, 146, 170, 170, 562, 146, 170, 170, 560
+            x1, x2, x3, x4, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 90, 50, 300, 220, 485, 700, 146, 170, 170, 562, 146, 170, 170, 560
         elif className in ["LK Academy 1 8U", "LK Academy 1 14U", "LK Academy 2 8U", "LK Academy 2 14U"]:
             pageToInsert = 9
-            x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 90, 50, 300, 485, 700, 146, 170, 170, 562, 146, 170, 170, 560
+            x1, x2, x3, x4, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 90, 50, 300, 220, 485, 700, 146, 170, 170, 562, 146, 170, 170, 560
         elif className in ["Spin Comp 1", "Spin Comp 2", "Intro To Spin"]:
             pageToInsert = 10
-            x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 90, 50, 300, 485, 700, 146, 170, 170, 562, 146, 170, 170, 560
+            x1, x2, x3, x4, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 90, 50, 300, 220, 485, 700, 146, 170, 170, 562, 146, 170, 170, 560
         elif className in ["Power 1", "Power 2"]:
             pageToInsert = 11
-            x1, x2, x3, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 90, 50, 300, 485, 700, 146, 170, 170, 562, 146, 170, 170, 560
+            x1, x2, x3, x4, x5, x7, y1, y2, y3, y4, y5, y6, y7, y8 = 90, 50, 300, 220, 485, 700, 146, 170, 170, 562, 146, 170, 170, 560
         if index == 0:
             previousPageToInsert = pageToInsert
             index = 1
@@ -128,7 +128,7 @@ def generate_progress_reports(lane_chart_stream, roster_stream, date):
                     page.insert_text((x1, y1), name, fontsize=25, fontname="helv", overlay=True)
                     page.insert_text((x2, y2), className, fontsize=17, fontname="helv", overlay=True)
                     page.insert_text((x3, y3), date, fontsize=17, fontname="helv", overlay=True)
-                    page.insert_text((220, y4), coach, fontsize=coachSize, fontname="helv", overlay=True)
+                    page.insert_text((x4, y4), coach, fontsize=coachSize, fontname="helv", overlay=True)
                     side = 2
                 else:
                     if previousPageToInsert == pageToInsert:
