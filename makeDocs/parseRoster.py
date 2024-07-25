@@ -180,6 +180,18 @@ def splitClasses(string: str) -> list:
 
     return formattedClasses
 
+#remove random classes 
+def filter_random_classes(data: list) -> list:
+    filtered_data = []
+    valid_classes = ["Basic", "Snowplow", "LK", "Freeskate", "Lions", "Adult", "Power"]
+
+    for item in data:
+        class_name = item[0]
+        # Check if the class_name contains any of the valid class prefixes
+        if any(valid_class in class_name for valid_class in valid_classes):
+            filtered_data.append(item)
+    return filtered_data
+
 #remove classes that dont need progress reports 
 def filter_valid_classes(data: list) -> list:
     filtered_data = []
@@ -210,9 +222,11 @@ def load_roster(roster_path:str) -> list:
     fullClasses = splitClasses(fullClasses)
     miniClasses = splitClasses(miniClasses)
 
-    #remove random blanks
+    #remove random blanks and random classes
     fullClasses = removeBlankItems(fullClasses)
     miniClasses = removeBlankItems(miniClasses)
+    fullClasses = filter_random_classes(fullClasses)
+    miniClasses = filter_random_classes(miniClasses)
     
     return fullClasses, miniClasses
 
