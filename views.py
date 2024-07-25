@@ -141,21 +141,6 @@ def upload_both_classes():
 
     if roster and mini_class_session and full_class_session:
         roster_stream = io.BytesIO(roster.read())
-        output_pdf_stream = generate_both_certificates(roster_stream, mini_class_session, full_class_session)
-
-        def generate():
-            chunk_size = 8192
-            while True:
-                chunk = output_pdf_stream.read(chunk_size)
-                if not chunk:
-                    break
-                yield chunk
-
-        headers = {
-            'Content-Disposition': 'attachment; filename=both_classes_certificates.pdf',
-            'Content-Type': 'application/pdf'
-        }
-
-        return Response(generate(), headers=headers)
+        return generate_both_certificates(roster_stream, mini_class_session, full_class_session)
     else:
         return "Please upload the roster and provide both class sessions.", 400
