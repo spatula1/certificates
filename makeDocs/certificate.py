@@ -214,11 +214,13 @@ def generate_both_certificates(roster_stream, mini_class_session, full_class_ses
 
                 page_num += 1
 
-        # Stream the PDF file in chunks
-            output_pdf.save('temp.pdf')
-            with open('temp.pdf', 'rb') as f:
-                while chunk := f.read(8192):
-                    yield chunk
-    
+        # Save the PDF to the in-memory buffer
+        output_pdf.save(pdf_buffer)
+        pdf_buffer.seek(0)  # Reset the buffer position to the beginning
+
+        # Yield the PDF in chunks
+        chunk_size = 8192
+        while chunk := pdf_buffer.read(chunk_size):
+            yield chunk
 
     return Response(generate(), content_type='application/pdf')
