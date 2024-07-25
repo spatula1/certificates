@@ -6,6 +6,7 @@ import io
 # Import the progress report script
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'makeDocs')))
 from makeDocs.progressReport import generate_progress_reports
+from makeDocs.certificate import generate_full_certificates, generate_mini_certificates, generate_both_certificates
 
 views = Blueprint('views', __name__)
 
@@ -41,6 +42,8 @@ def serve_static(filename):
 @views.route('/download/<filename>')
 def download_file(filename):
     directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'toPrint')
+    if not os.path.exists(directory):
+        raise FileNotFoundError(f"Directory not found: {directory}")
     return send_from_directory(directory, filename, as_attachment=True)
 
 #upload and process progress report
@@ -80,3 +83,76 @@ def upload_progress_report():
             return f"An error occurred: {e}", 500
     else:
         return "Please upload both files and select a date", 400
+
+
+
+#upload and process certificates
+@views.route('/upload-mini-class', methods=['POST'])
+def upload_mini_class():
+    roster = request.files.get('roster')
+    mini_class_session = request.form.get('miniClassSession')
+
+    if roster and mini_class_session:
+        roster_stream = io.BytesIO(roster.read())
+        # Assuming you have a function to handle mini class certificates
+        output_pdf_stream = generate_mini_certificates(roster_stream, mini_class_session)
+        
+        if output_pdf_stream.getvalue() == b'':
+            return "Generated PDF is empty.", 500
+        
+        output_pdf_stream.seek(0)
+        return send_file(
+            output_pdf_stream,
+            as_attachment=True,
+            download_name='mini_class_certificates.pdf',
+            mimetype='application/pdf'
+        )
+    else:
+        return "Please upload the roster and provide a mini class session.", 400
+
+@views.route('/upload-full-class', methods=['POST'])
+def upload_full_class():
+    roster = request.files.get('roster')
+    full_class_session = request.form.get('fullClassSession')
+
+    if roster and full_class_session:
+        roster_stream = io.BytesIO(roster.read())
+        # Assuming you have a function to handle full class certificates
+        output_pdf_stream = generate_full_certificates(roster_stream, full_class_session)
+        
+        if output_pdf_stream.getvalue() == b'':
+            return "Generated PDF is empty.", 500
+        
+        output_pdf_stream.seek(0)
+        return send_file(
+            output_pdf_stream,
+            as_attachment=True,
+            download_name='full_class_certificates.pdf',
+            mimetype='application/pdf'
+        )
+    else:
+        return "Please upload the roster and provide a full class session.", 400
+
+@views.route('/upload-both-classes', methods=['POST'])
+def upload_both_classes():
+    roster = request.files.get('roster')
+    mini_class_session = request.form.get('miniClassSession')
+    full_class_session = request.form.get('fullClassSession')
+
+    if roster and mini_class_session and full_class_session:
+        roster_stream = io.BytesIO(roster.read())
+        # Assuming you have a function to handle both classes' certificates
+        output_pdf_stream = generate_both_certificates(roster_stream, mini_class_session, full_class_session)
+        
+        if output_pdf_stream.getvalue() == b'':
+            return "Generated PDF is empty.", 500
+        
+        output_pdf_stream.seek(0)
+        return send_file(
+            output_pdf_stream,
+            as_attachment=True,
+            download_name='both_classes_certificates.pdf',
+            mimetype='application/pdf'
+        )
+    else:
+        return "Please upload the roster and provide both class sessions.", 400
