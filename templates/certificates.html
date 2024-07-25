@@ -3,12 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Upload Roster</title>
 </head>
 <body>
-    certificates 
-    <button id="returnHomeButton">return home</button>
+    <h1>Certificates</h1>
 
+    <!--upload only mini classes-->
+    <h3>Generate only mini session Certificates</h3>
+    <form action="/upload-mini-class" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="roster">Upload Roster PDF:</label>
+            <input type="file" id="roster" name="roster" accept=".pdf" required>
+        </div>
+        <div>
+            <label for="miniClassSession">Mini Class Session:</label>
+            <input type="text" id="miniClassSession" name="miniClassSession" required>
+            <small> &#40Ex. Jan Mini&#41</small>
+        </div>
+        <button type="submit">Generate Mini Session Certificates</button>
+    </form>
+    <br>
+    <!--upload only full classes-->
+    <h3>Generate only full session Certificates</h3>
+    <form action="/upload-full-class" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="roster">Upload Roster PDF:</label>
+            <input type="file" id="roster" name="roster" accept=".pdf" required>
+        </div>
+        <div>
+            <label for="fullClassSession">Full Class Session:</label>
+            <input type="text" id="fullClassSession" name="fullClassSession" required>
+            <small> &#40Ex. Jan/Feb&#41</small>
+        </div>
+        <button type="submit">Generate Full Session Certificates</button>
+    </form>
+    <br>
+    <!--upload both mini and full classes-->
+    <h3>Generate mini and full session Certificates</h3>
+    <form action="/upload-both-classes" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="roster">Upload Roster PDF:</label>
+            <input type="file" id="roster" name="roster" accept=".pdf" required>
+        </div>
+        <div>
+            <label for="miniClassSession">Mini Class Session:</label>
+            <input type="text" id="miniClassSession" name="miniClassSession" required>
+            <small> &#40Ex. Jan Mini&#41</small>
+        </div>
+        <div>
+            <label for="fullClassSession">Full Class Session:</label>
+            <input type="text" id="fullClassSession" name="fullClassSession" required>
+            <small> &#40Ex. Jan/Feb&#41</small>
+        </div>
+        <button type="submit">Generate Both Certificates</button>
+    </form>
+
+    <br>
+
+    <button id="returnHomeButton">Return Home</button>
+    
+    {% if filename %}
+        <a href="{{ url_for('views.download_file', filename=filename) }}">Download Progress Report PDF</a>
+    {% endif %}
+    
     <!-- Include the JavaScript file -->
     <script src="static/script.js"></script>
 </body>
