@@ -130,6 +130,10 @@ def generate_full_certificates(roster_stream, full_class_session):
 def generate_both_certificates(roster_stream, mini_class_session, full_class_session):
 
     def generate():
+
+        # Create a memory buffer to save the PDF
+        pdf_buffer = io.BytesIO()
+        
         fullClasses, miniClasses = load_roster(roster_stream)#get class rosters
         temp = fitz.open('pdfImports/certificate.pdf') #open certificate template
         output_pdf = fitz.open()  # Create an empty PDF
