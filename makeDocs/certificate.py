@@ -11,8 +11,7 @@ from makeDocs.parseRoster import load_roster
 app = Flask(__name__)
 
 # Initialize the S3 client
-s3 = boto3.client('s3')
-
+s3 = boto3.client('s3', region_name='us-east-2', config=boto3.session.Config(signature_version='s3v4'))
 BUCKET_NAME = 'tspc-certificates'
 
 #function to upload file to AWS s3
