@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, send_from_directory, send_file, Response
+from flask import Blueprint, render_template, redirect, url_for, request, send_from_directory, send_file, jsonify
 import os
 import sys
 import io
@@ -6,7 +6,7 @@ import io
 # Import the progress report script
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'makeDocs')))
 from makeDocs.progressReport import generate_progress_reports
-from makeDocs.certificate import generate_full_certificates, generate_mini_certificates, generate_both_certificates
+from makeDocs.certificate import generate_full_certificates, generate_mini_certificates, generate_both_certificates, upload_to_s3, generate_presigned_url, BUCKET_NAME
 
 views = Blueprint('views', __name__)
 
@@ -94,19 +94,25 @@ def upload_mini_class():
 
     if roster and mini_class_session:
         roster_stream = io.BytesIO(roster.read())
-        # Assuming you have a function to handle mini class certificates
         output_pdf_stream = generate_mini_certificates(roster_stream, mini_class_session)
-        
+
         if output_pdf_stream.getvalue() == b'':
             return "Generated PDF is empty.", 500
+
+        # Upload to S3
+        file_name = 'mini_class_certificates.pdf'
+        output_pdf_stream.seek(0)  # Ensure we are at the beginning of the stream
+        success = upload_to_s3(output_pdf_stream, file_name, BUCKET_NAME)
         
-        output_pdf_stream.seek(0)
-        return send_file(
-            output_pdf_stream,
-            as_attachment=True,
-            download_name='mini_class_certificates.pdf',
-            mimetype='application/pdf'
-        )
+        if not success:
+            return "Failed to upload to S3.", 500
+
+        # Generate presigned URL
+        url = generate_presigned_url(BUCKET_NAME, file_name)
+        if url is None:
+            return "Failed to generate download link.", 500
+
+        return render_template('download-certificate.html', url=url)
     else:
         return "Please upload the roster and provide a mini class session.", 400
 
@@ -117,19 +123,25 @@ def upload_full_class():
 
     if roster and full_class_session:
         roster_stream = io.BytesIO(roster.read())
-        # Assuming you have a function to handle full class certificates
         output_pdf_stream = generate_full_certificates(roster_stream, full_class_session)
-        
+
         if output_pdf_stream.getvalue() == b'':
             return "Generated PDF is empty.", 500
-        
+
+        # Upload to S3
+        file_name = 'full_class_certificates.pdf'
         output_pdf_stream.seek(0)
-        return send_file(
-            output_pdf_stream,
-            as_attachment=True,
-            download_name='full_class_certificates.pdf',
-            mimetype='application/pdf'
-        )
+        success = upload_to_s3(output_pdf_stream, file_name, BUCKET_NAME)
+        
+        if not success:
+            return "Failed to upload to S3.", 500
+
+        # Generate presigned URL
+        url = generate_presigned_url(BUCKET_NAME, file_name)
+        if url is None:
+            return "Failed to generate download link.", 500
+
+        return render_template('download-certificate.html', url=url)
     else:
         return "Please upload the roster and provide a full class session.", 400
 
@@ -141,6 +153,24 @@ def upload_both_classes():
 
     if roster and mini_class_session and full_class_session:
         roster_stream = io.BytesIO(roster.read())
-        return generate_both_certificates(roster_stream, mini_class_session, full_class_session)
+        output_pdf_stream = generate_both_certificates(roster_stream, mini_class_session, full_class_session)
+
+        if output_pdf_stream.getvalue() == b'':
+            return jsonify({"error": "Generated PDF is empty."}), 500
+
+        # Upload to S3
+        file_name = 'both_classes_certificates.pdf'
+        output_pdf_stream.seek(0)
+        success = upload_to_s3(output_pdf_stream, file_name, BUCKET_NAME)
+        
+        if not success:
+            return jsonify({"error": "Failed to upload to S3."}), 500
+
+        # Generate presigned URL
+        url = generate_presigned_url(BUCKET_NAME, file_name)
+        if url is None:
+            return jsonify({"error": "Failed to generate download link."}), 500
+
+        return render_template('download-certificate.html', url=url)
     else:
-        return "Please upload the roster and provide both class sessions.", 400
+        return jsonify({"error": "Please upload the roster and provide both class sessions."}), 400
