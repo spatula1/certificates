@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>Certificates</h1>
+    <h3>***Please allow a minute for the certificates to render***</h3>
 
     <!--upload only mini classes-->
     <h3>Generate only mini session Certificates</h3>
@@ -62,11 +63,15 @@
 
     <button id="returnHomeButton">Return Home</button>
     
-    {% if filename %}
-        <a href="{{ url_for('views.download_file', filename=filename) }}">Download Progress Report PDF</a>
-    {% endif %}
+    <div id="download-link" style="display: none;">
+        <h2>Your download link:</h2>
+        <a id="download-url" href="#" target="_blank">Download Certificates</a>
+    </div>
+
+    <div id="result"></div>
     
-    <!-- Include the JavaScript file -->
+    <!-- Include the JavaScript/css file -->
+    <!--<link rel="stylesheet" href="static/certificates.css">-->
     <script src="static/script.js"></script>
 </body>
 </html>
