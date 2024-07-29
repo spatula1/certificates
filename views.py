@@ -174,3 +174,4 @@ def upload_both_classes():
         return render_template('download-certificate.html', url=url)
     else:
         return jsonify({"error": "Please upload the roster and provide both class sessions."}), 400
+        
