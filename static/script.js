@@ -29,6 +29,17 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         handleFormSubmission(this, '/upload-both-classes');
     });
+
+    document.getElementById('badges-mini').addEventListener('submit', function(event) {
+        event.preventDefault();
+        handleFormSubmission(this, '/upload-mini-badges');
+    });
+
+    document.getElementById('badges-full').addEventListener('submit', function(event) {
+        event.preventDefault();
+        handleFormSubmission(this, '/upload-full-badges');
+    });
+    
 });
 
 function handleFormSubmission(form, url) {
