@@ -7,6 +7,7 @@ import io
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'makeDocs')))
 from makeDocs.progressReport import generate_progress_reports
 from makeDocs.certificate import generate_full_certificates, generate_mini_certificates, generate_both_certificates, upload_to_s3, generate_presigned_url, BUCKET_NAME
+from makeDocs.badges import generate_mini_badges, generate_full_badges, upload_to_s3, generate_presigned_url, BUCKET_NAME
 
 views = Blueprint('views', __name__)
 
@@ -161,7 +162,7 @@ def upload_both_classes():
         # Upload to S3
         file_name = 'both_classes_certificates.pdf'
         output_pdf_stream.seek(0)
-        success = upload_to_s3(output_pdf_stream, file_name, BUCKET_NAME)
+        success = upload_to_s3(output_pdf_stream, file_name, BUCKET_NAME),
         
         if not success:
             return jsonify({"error": "Failed to upload to S3."}), 500
@@ -174,4 +175,58 @@ def upload_both_classes():
         return render_template('download-certificate.html', url=url)
     else:
         return jsonify({"error": "Please upload the roster and provide both class sessions."}), 400
+    
+
+#upload and process badges
+#only mini badges 
+@views.route('/upload-mini-badges', methods=['POST'])
+def upload_mini_badges():
+    roster = request.files['roster']
+    badgeTemplate = request.files['badgeTemplate']
+    
+    if roster and badgeTemplate:
+        roster_stream = io.BytesIO(roster.read())
+        badge_template_stream = io.BytesIO(badgeTemplate.read())
+        # Generate the badges
+        mini_badges_pdf_stream = generate_mini_badges(roster_stream, badge_template_stream)
+
+        # Define the file name for the uploaded file
+        file_name = 'mini_badges.pdf'
         
+        # Upload to S3
+        success = upload_to_s3(mini_badges_pdf_stream, file_name, BUCKET_NAME)
+        
+        if success:
+            # Generate the presigned URL
+            url = generate_presigned_url(BUCKET_NAME, file_name)
+            return render_template('download-badges.html', url=url)
+        else:
+            return jsonify({'error': 'Failed to upload to S3'})
+    else:
+        return jsonify({'error': 'Invalid files'})
+
+#full badges
+@views.route('/upload-full-badges', methods=['POST'])
+def upload_full_badges():
+    roster = request.files['roster']
+    badgeTemplate = request.files['badgeTemplate']
+    
+    if roster and badgeTemplate:
+        roster_stream = io.BytesIO(roster.read())
+        badge_template_stream = io.BytesIO(badgeTemplate.read())
+        # Generate the badges
+        full_badges_pdf_stream = generate_full_badges(roster_stream, badge_template_stream) # replace with generate_full_badges
+        # Define the file name for the uploaded file
+        file_name = 'full_badges.pdf'
+        
+        # Upload to S3
+        success = upload_to_s3(full_badges_pdf_stream, file_name, BUCKET_NAME)
+        
+        if success:
+            # Generate the presigned URL
+            url = generate_presigned_url(BUCKET_NAME, file_name)
+            return render_template('download-badges.html', url=url)
+        else:
+            return jsonify({'error': 'Failed to upload to S3'})
+    else:
+        return jsonify({'error': 'Invalid files'})
