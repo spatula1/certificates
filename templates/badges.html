@@ -6,14 +6,49 @@
     <title>PDF Generator</title>
 </head>
 <body>
-    <h1>PDF Generator</h1>
-    <form action="makeDocs/badges.py" method="post">
-        <textarea name="classes" rows="10" cols="50"></textarea><br>
-        <button type="submit">Generate PDF</button>
+    <h1>Badges</h1>
+    <h3>***Please allow a minute for the badges to render***</h3>
+
+    <!--upload only mini classes-->
+    <h3>Generate only mini session badges</h3>
+    <form action="/upload-mini-badges" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="roster">Upload Roster PDF:</label>
+            <input type="file" id="roster" name="roster" accept=".pdf" required>
+        </div>
+        <div>
+            <label for="badgeTemplate">Upload badges PDF:</label>
+            <input type="file" id="badgeTemplate" name="badgeTemplate" accept=".pdf" required>
+        </div>
+        <button type="submit">Generate Mini Session Badges</button>
     </form>
-    <button id ="returnHomeButton">return home</button>
+    <br>
+    <!--upload only full classes-->
+    <h3>Generate only full session badges</h3>
+    <form action="/upload-full-badges" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="roster">Upload Roster PDF:</label>
+            <input type="file" id="roster" name="roster" accept=".pdf" required>
+        </div>
+        <div>
+            <label for="badgeTemplate">Upload badges PDF:</label>
+            <input type="file" id="badgeTemplate" name="badgeTemplate" accept=".pdf" required>
+        </div>
+        <button type="submit">Generate Full Session Badges</button>
+    </form>
+    <br>
+
+    <button id="returnHomeButton">Return Home</button>
+    
+    <div id="download-link" style="display: none;">
+        <h2>Your download link:</h2>
+        <a id="download-url" href="#" target="_blank">Download Badges</a>
+    </div>
+
+    <div id="result"></div>
     
     <!-- Include the JavaScript file -->
     <script src="static/script.js"></script>
 </body>
 </html>
+
