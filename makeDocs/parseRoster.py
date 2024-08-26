@@ -183,7 +183,7 @@ def splitClasses(string: str) -> list:
 #remove random classes 
 def filter_random_classes(data: list) -> list:
     filtered_data = []
-    valid_classes = ["Basic", "Snowplow", "LK", "Freeskate", "Lions", "Adult", "Power"]
+    valid_classes = ["Basic", "Snowplow", "LK", "Freeskate", "Lions", "Adult", "Power", "Spin", "Spins"]
 
     for item in data:
         class_name = item[0]
