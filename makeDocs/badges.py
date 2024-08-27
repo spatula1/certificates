@@ -84,7 +84,7 @@ def generate_mini_badges(roster_stream, badge_template_stream):
             fontSize = 25
 
         if string == "Thurs":
-            string == "Thu"
+            fontSize = 14
         # Print information on badge
         page.insert_text((x, y), string, fontSize, fontname="helv", rotate=rotation, overlay=True)
 
@@ -173,7 +173,7 @@ def generate_full_badges(roster_stream, badge_template_stream):
             string = "LK Adv SS 14U"
         
         if string == "Thurs":
-            string == "Thu"
+            fontSize = 14
         # Print information on badge
         page.insert_text((x, y), string, fontSize, fontname="helv", rotate=rotation, overlay=True)
 
