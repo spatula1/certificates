@@ -84,7 +84,7 @@ def generate_mini_badges(roster_stream, badge_template_stream):
             fontSize = 25
 
         if string == "LK Adv Skating Skills 8U" or string == "LK Adv Skating Skills 14U":
-            fontSize = 10
+            fontSize = 12
 
         if string == "Thurs":
             fontSize = 14
@@ -171,7 +171,7 @@ def generate_full_badges(roster_stream, badge_template_stream):
             fontSize = 25
 
         if string == "LK Adv Skating Skills 8U" or string == "LK Adv Skating Skills 14U":
-            fontSize = 10
+            fontSize = 12
 
         if string == "Thurs":
             fontSize = 14
