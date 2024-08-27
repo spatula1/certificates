@@ -83,11 +83,8 @@ def generate_mini_badges(roster_stream, badge_template_stream):
         else:
             fontSize = 25
 
-        if string == "LK Adv Skating Skills 8U" or string == "LK Adv Skating Skills 14U":
-            fontSize = 12
-
         if string == "Thurs":
-            fontSize = 14
+            string == "Thu"
         # Print information on badge
         page.insert_text((x, y), string, fontSize, fontname="helv", rotate=rotation, overlay=True)
 
@@ -169,12 +166,14 @@ def generate_full_badges(roster_stream, badge_template_stream):
             fontSize = size
         else:
             fontSize = 25
-
-        if string == "LK Adv Skating Skills 8U" or string == "LK Adv Skating Skills 14U":
-            fontSize = 12
-
+        #change string name to fit on line 
+        if string == "LK Adv Skating Skills 8U":
+            string = "LK Adv SS 8U"
+        if string == "LK Adv Skating Skills 14U":
+            string = "LK Adv SS 14U"
+        
         if string == "Thurs":
-            fontSize = 14
+            string == "Thu"
         # Print information on badge
         page.insert_text((x, y), string, fontSize, fontname="helv", rotate=rotation, overlay=True)
 
