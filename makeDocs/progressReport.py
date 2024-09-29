@@ -128,14 +128,14 @@ def generate_progress_reports(lane_chart_stream, roster_stream, date):
                     page.insert_text((x1, y1), name, fontsize=25, fontname="helv", overlay=True)
                     page.insert_text((x2, y2), className, fontsize=17, fontname="helv", overlay=True)
                     page.insert_text((x3, y3), date, fontsize=15, fontname="helv", overlay=True)
-                    page.insert_text((x4, y4), coach, fontsize=coachSize, fontname="helv", overlay=True)
+                    #page.insert_text((x4, y4), coach, fontsize=coachSize, fontname="helv", overlay=True)
                     side = 2
                 else:
                     if previousPageToInsert == pageToInsert:
                         page.insert_text((x5, y5), name, fontsize=25, fontname="helv", overlay=True)
                         page.insert_text((450, y6), className, fontsize=17, fontname="helv", overlay=True)
                         page.insert_text((x7, y7), date, fontsize=15, fontname="helv", overlay=True)
-                        page.insert_text((620, y8), coach, fontsize=coachSize, fontname="helv", overlay=True)
+                        #page.insert_text((620, y8), coach, fontsize=coachSize, fontname="helv", overlay=True)
                         side = 1
                         currentPage += 1
                     else:
@@ -145,7 +145,7 @@ def generate_progress_reports(lane_chart_stream, roster_stream, date):
                         page.insert_text((x1, y1), name, fontsize=25, fontname="helv", overlay=True)
                         page.insert_text((x2, y2), className, fontsize=17, fontname="helv", overlay=True)
                         page.insert_text((x3, y3), date, fontsize=15, fontname="helv", overlay=True)
-                        page.insert_text((220, y4), coach, fontsize=coachSize, fontname="helv", overlay=True)
+                        #page.insert_text((220, y4), coach, fontsize=coachSize, fontname="helv", overlay=True)
                         side = 2
                 previousPageToInsert = pageToInsert
             else:
@@ -156,7 +156,7 @@ def generate_progress_reports(lane_chart_stream, roster_stream, date):
                     page.insert_text((x1, y1), name, fontsize=25, fontname="helv", overlay=True)
                     page.insert_text((x2, y2), className, fontsize=17, fontname="helv", overlay=True)
                     page.insert_text((x3, y3), date, fontsize=15, fontname="helv", overlay=True)
-                    page.insert_text((220, y4), coach, fontsize=coachSize, fontname="helv", overlay=True)
+                    #page.insert_text((220, y4), coach, fontsize=coachSize, fontname="helv", overlay=True)
                     side = 1
                 else:
                     doc.insert_pdf(temp_pdf, from_page=pageToInsert, to_page=pageToInsert)
@@ -164,7 +164,7 @@ def generate_progress_reports(lane_chart_stream, roster_stream, date):
                     page.insert_text((x5, y5), name, fontsize=25, fontname="helv", overlay=True)
                     page.insert_text((450, y6), className, fontsize=17, fontname="helv", overlay=True)
                     page.insert_text((x7, y7), date, fontsize=15, fontname="helv", overlay=True)
-                    page.insert_text((620, y8), coach, fontsize=coachSize, fontname="helv", overlay=True)
+                    #page.insert_text((620, y8), coach, fontsize=coachSize, fontname="helv", overlay=True)
                     side = 1
                     currentPage += 1
 
