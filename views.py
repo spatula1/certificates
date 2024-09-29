@@ -50,23 +50,23 @@ def download_file(filename):
 #upload and process progress report
 @views.route('/upload-progress-report', methods=['POST'])
 def upload_progress_report():
-    lane_chart = request.files.get('laneChart')
+    #lane_chart = request.files.get('laneChart')
     roster = request.files.get('roster')
     date = request.form.get('date')
 
     if roster and date:
         # Read files into memory
-        lane_chart_stream = io.BytesIO(lane_chart.read())
+        #lane_chart_stream = io.BytesIO(lane_chart.read())
         roster_stream = io.BytesIO(roster.read())
         
         # Debugging: Print lengths to ensure they're not empty
-        if lane_chart_stream.getvalue() == b'':
-            return "Lane chart file is empty.", 400
+        #if lane_chart_stream.getvalue() == b'':
+            #return "Lane chart file is empty.", 400
         if roster_stream.getvalue() == b'':
             return "Roster file is empty.", 400
         
         try:
-            output_pdf_stream = generate_progress_reports(lane_chart_stream, roster_stream, date)
+            output_pdf_stream = generate_progress_reports(roster_stream, date)
             
             # Check if the PDF stream is empty
             if output_pdf_stream.getvalue() == b'':
