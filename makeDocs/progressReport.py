@@ -25,10 +25,10 @@ page 10 - spin comp 1 2 // intro to spin
 page 11 - power
 '''
 
-def generate_progress_reports(lane_chart_stream, roster_stream, date):
+def generate_progress_reports(roster_stream, date):
     # Load the roster and lane chart data from in-memory streams
     fullClasses = parseRoster.load_progress_roster(io.BytesIO(roster_stream.read()))
-    coachRoster = parseLaneChart.load_lane_chart(io.BytesIO(lane_chart_stream.read()))
+    #coachRoster = parseLaneChart.load_lane_chart(io.BytesIO(lane_chart_stream.read()))
 
     # Initialize in-memory PDF documents
     output_pdf_stream = io.BytesIO()
@@ -62,11 +62,11 @@ def generate_progress_reports(lane_chart_stream, roster_stream, date):
     for aClass in fullClasses:
         className = aClass[0]
 
-        for coachClass in coachRoster:
-            if cleanString(coachClass[1]) == cleanString(className.upper()):
-                coach = coachClass[0]
-                coachRoster.remove(coachClass)
-                break
+        #for coachClass in coachRoster:
+            #if cleanString(coachClass[1]) == cleanString(className.upper()):
+                #coach = coachClass[0]
+                #coachRoster.remove(coachClass)
+                #break
 
         if len(coach) < 12:
             coachSize = 17
