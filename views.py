@@ -54,7 +54,7 @@ def upload_progress_report():
     roster = request.files.get('roster')
     date = request.form.get('date')
 
-    if lane_chart and roster and date:
+    if roster and date:
         # Read files into memory
         lane_chart_stream = io.BytesIO(lane_chart.read())
         roster_stream = io.BytesIO(roster.read())
@@ -83,7 +83,7 @@ def upload_progress_report():
         except Exception as e:
             return f"An error occurred: {e}", 500
     else:
-        return "Please upload both files and select a date", 400
+        return "Please upload all files and select a date", 400
 
 
 
