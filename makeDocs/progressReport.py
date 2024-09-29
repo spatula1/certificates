@@ -68,14 +68,14 @@ def generate_progress_reports(roster_stream, date):
                 #coachRoster.remove(coachClass)
                 #break
 
-        if len(coach) < 12:
-            coachSize = 17
-        elif len(coach) < 16:
-            coachSize = 14
-        elif len(coach) < 19:
-            coachSize = 12
-        else:
-            coachSize = 10
+        #if len(coach) < 12:
+            #coachSize = 17
+        #elif len(coach) < 16:
+            #coachSize = 14
+        #elif len(coach) < 19:
+            #coachSize = 12
+        #else:
+            #coachSize = 10
 
         del aClass[1:3]  # remove class time and day
 
