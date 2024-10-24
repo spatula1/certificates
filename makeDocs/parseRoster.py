@@ -211,7 +211,7 @@ def load_roster(roster_path:str) -> list:
     filteredData = parseData(extractTextFromPdf(roster_path))
 
     #split mini/8 week classes
-    miniClasses, fullClasses = splitMini(filteredData, "7 Week")
+    miniClasses, fullClasses = splitMini(filteredData, "8 Week")
     #remove line with groupon/mini and blank lines
     miniClasses = removeFirstLine(miniClasses)
     fullClasses = removeFirstLine(fullClasses)
