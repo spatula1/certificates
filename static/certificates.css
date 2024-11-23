@@ -1,0 +1,141 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 0;
+}
+
+/* Container styling for forms */
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Heading styling */
+h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #666;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+/* Label styling */
+label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Input styling */
+input[type="file"],
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Small help text styling */
+small {
+    display: block;
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Return Home button styling */
+#returnHomeButton {
+    background-color: #555;
+    color: #fff;
+    width: 200px;
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#returnHomeButton:hover {
+    background-color: #444;
+}
+
+/* Download link styling */
+#download-link {
+    background-color: #e7f4ea;
+    padding: 15px;
+    border: 1px solid #cce7d1;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 500px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+#download-link h2 {
+    color: #333;
+    margin: 0;
+}
+
+#download-url {
+    color: #4CAF50;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#download-url:hover {
+    text-decoration: underline;
+}
+
+/* Styling for result container */
+#result {
+    margin-top: 20px;
+    font-size: 1em;
+    color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+    h1 {
+        font-size: 2em;
+    }
+    button, #returnHomeButton {
+        width: 100%;
+    }
+}
